@@ -1,1 +1,0 @@
-import goals from './script.js';
