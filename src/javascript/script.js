@@ -1,22 +1,9 @@
-let goals = [];
-
-export default goals = [
-    {
-        title: '',
-        desiredFrequency: 5,
-        completed: 0,
-    },
-    {
-        title: '',
-        desiredFrequency: 5,
-        completed: 2,
-    },
-];
+import goals from './create-goal.js';
 
 // colocar as datas seguindo padrão português brasileiro
 dayjs.locale('pt-br');
 
-// código para determinar dias da página
+// código para determinar textos da página
 const firstDayOfWeek = dayjs().startOf('week');
 const lastDayOfWeek = dayjs().endOf('week');
 
@@ -51,3 +38,17 @@ for (const goal of goals){
     }
 
 }
+
+const today = dayjs().format('ddd[,] DD [de] MMM');
+
+const dateGoalCompleted = document.querySelector('.js-dateGoal');
+
+dateGoalCompleted.textContent = today;
+
+goals.forEach((goal) => {
+    const titleCompletedGoal = document.querySelector(`.js-titleGoalCompleted-${goal.id}`);
+    const infoCompletedHour = document.querySelector(`.js-completedInfoHour-${goal.id}`);
+
+    titleCompletedGoal.textContent = goal.title;
+    infoCompletedHour.textContent = goal.completedHour;
+});
