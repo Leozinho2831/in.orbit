@@ -1,1 +1,1 @@
-import goals from './create-goal.js';
+const goals = localStorage.getItem('goalsArray');
