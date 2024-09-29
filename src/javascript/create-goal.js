@@ -54,5 +54,3 @@ function createGoal(event){
 }
 
 window.createGoal = createGoal;
-
-export default goals;
