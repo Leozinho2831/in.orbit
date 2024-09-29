@@ -1,5 +1,6 @@
 :root{
     --pink-500: #EC4899;
+    --red-700: #b91c1c;
     --shadow-input-focus: rgba(237, 100, 192, 0.1);
 
     --bg-label-checked: rgba(139, 92, 246, 0.05);
@@ -38,4 +39,12 @@ input[type="radio"]:checked + label{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.js-requiredText{
+    display: flex;
+}
+
+.js-required{
+    border: 1px solid var(--red-700);
 }
