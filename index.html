@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/images/favicon.svg" type="image/x-icon">
+    <link href="src/styles/output.css" rel="stylesheet">
+    <link href="src/styles/custom.css" rel="stylesheet">
+    <script type="module" src="src/javascript/script.js"></script>
+    <title>in.orbit</title>
+</head>
+<body class="font-inter bg-zinc-950">
+
+    <main class="relative">
+
+        <section class="hidden min-h-screen max-w-[800px] mx-auto my-0 flex-col items-center justify-center gap-7 js-sectionBlur js-sectionInit">
+
+            <figure>
+                <img src="src/images/logo.svg" alt="in.orbit">
+            </figure>
+            <figure>
+                <img src="src/images/ilustração inicial.svg" alt="ilustração">
+            </figure>
+
+            <p class="text-zinc-300 text-[1.125rem] leading-[1.5rem] text-center">Você ainda não cadastrou nenhuma meta, que tal <a class="border-b-2 border-zinc-300 cursor-pointer transition-all duration-75 hover:text-zinc-400 hover:border-zinc-400" onclick="openRegisterGoal()">cadastrar</a> uma agora mesmo?</p>
+
+            <button class="flex items-center px-4 py-3 gap-2 bg-violet-500 font-medium text-[0.875rem] leading-[1rem] text-violet-50 rounded-lg transition-all duration-75 hover:bg-violet-600" onclick="openRegisterGoal()">
+                <img class="w-4 h-4" src="src/images/plus white.svg" alt="sinal de mais">
+                Cadastrar meta
+            </button>
+
+        </section>
+
+        <section class="hidden min-h-screen scroll-auto w-[320px] p-8 bg-zinc-950 border-l border-zinc-900 absolute top-0 right-0 z-10 mobile:w-[400px] js-sectionGoalMenu">
+
+            <div class="flex flex-col gap-6">
+
+                <div>
+                    <figure class="flex w-[100%] justify-between gap-7">
+                        <h1 class="font-semibold text-zinc-50 text-[1.125rem] leading-[1.4rem] ">Cadastrar meta</h1>
+                        <img class="w-5 h-5 cursor-pointer js-closeMenu" src="src/images/close create goal.svg" alt="fechar menu" onclick="closeCreateGoal(event)">
+                    </figure>
+                    <p class="mt-3 col-span-2 text-zinc-400 text-[0.875rem] leading-[1.25rem]">
+                        Adicione atividades que 
+                        <span class="border-b-2 border-zinc-300">te fazem bem
+                        </span> 
+                        e que você quer continuar praticando toda semana.
+                    </p>
+                </div>
+    
+                <div>
+                    <label class="font-medium text-[0.875rem] leading-[1rem] text-zinc-50" for="input-title-goal">
+                        Qual a atividade?
+                    </label>
+                    <input class="w-full mt-2 px-4 py-3 rounded-[0.5rem] border border-zinc-900 bg-black text-[0.875rem] leading-[1.25rem] text-zinc-50 focus:outline-none focus:border-pink-500 hover:border-zinc-800 custom-shadow" id="input-title-goal" type="text" placeholder="Praticar exercícios, meditar, etc...">
+                </div>
+    
+                <form action="#" class="flex flex-col gap-2">
+                    <h3 class="font-medium text-zinc-50 text-[0.875rem] leading-[1rem]">
+                        Quantas vezes na semana?
+                    </h3>
+                
+                    <input class="hidden" type="radio" id="1-week" name="times-week" value="1">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 text-[0.875rem] leading-[1.25rem] rounded-[0.5rem] cursor-pointer hover:border-zinc-800" for="1-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-1-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            1x na semana
+                        </span>
+                        <span>😅</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="2-week" name="times-week" value="2">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem]  text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="2-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-2-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            2x na semana
+                        </span>
+                        <span>😊</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="3-week" name="times-week" value="3">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem] text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="3-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-3-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            3x na semana
+                        </span>
+                        <span>😎</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="4-week" name="times-week" value="4">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem] text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="4-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-4-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            4x na semana
+                        </span>
+                        <span>😜</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="5-week" name="times-week" value="5">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem] text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="5-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-5-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            5x na semana
+                        </span>
+                        <span>😌</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="6-week" name="times-week" value="6">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem] text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="6-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-6-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            6x na semana
+                        </span>
+                        <span>🥳</span>
+                    </label>
+                
+                    <input class="hidden" type="radio" id="all-week" name="times-week" value="7">
+                    <label class="flex items-center justify-between px-4 py-3 bg-black border-zinc-900 rounded-[0.5rem] text-[0.875rem] leading-[1.25rem] cursor-pointer hover:border-zinc-800" for="all-week">
+                        <figure class="w-4 h-4">
+                            <img class="js-circle js-circle-all-week" src="src/images/circle not checked.svg" alt="círculo não ativo">
+                        </figure>
+                        <span class="font-medium text-zinc-300">
+                            Todos os dias da semana
+                        </span>
+                        <span>🔥</span>
+                    </label>
+                </form>                
+
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button class="flex-1 flex items-center justify-center px-4 py-3 rounded-lg bg-zinc-900 font-medium text-[0.875rem] leading-[1rem] text-zinc-400" onclick="closeCreateGoal(event)">
+                    Fechar
+                </button>
+                <button class="flex-1 flex items-center justify-center px-4 py-3 bg-violet-500 font-medium text-[0.875rem] leading-[1rem] text-violet-50 rounded-lg transition-all duration-75 hover:bg-violet-600">
+                    Salvar
+                </button>
+            </div>
+            
+        </section>
+
+        <section class="hidden flex-col gap-6 max-w-[600px] mx-auto my-0 py-10 px-5 js-sectionGoal">
+
+            <div class="flex items-center justify-between gap-3">
+                <figure class="w-fit flex items-center gap-3">
+                    <img class="w-6 h-6" src="src/images/icon inOrbit.svg" alt="in.orbit">
+                    <h1 class="font-semibold text-zinc-50 text-[1.125rem] leading-[1.4rem] js-weekTitle">
+                        05 a 12 de Agosto
+                    </h1>
+                </figure>
+                <button class="flex items-center px-3 py-2 gap-2 bg-violet-500 font-medium text-[0.875rem] leading-[1rem] text-violet-50 rounded-lg transition-all duration-75 hover:bg-violet-600" onclick="openRegisterGoal()">
+                    <img class="w-4 h-4" src="src/images/plus white.svg" alt="sinal de mais">
+                    Cadastrar meta
+                </button>
+            </div>
+
+            <div class="grid gap-3 grid-rows-[20px_auto]">
+                <div class="col-span-2 w-full h-2 bg-zinc-900 rounded-full relative">
+                    <div class="w-[58%] h-2 bg-gradient-to-r from-pink-400 to-violet-500 rounded-full absolute z-[1] js-completedGoalBar"></div>
+                </div>
+
+                <p class="text-[0.75rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400">
+                    Você completou 
+                    <b class="font-normal text-zinc-100 js-completedGoal">8</b> 
+                    de 
+                    <b class="font-normal text-zinc-100 js-totalGoal">15</b> 
+                    metas nessa semana.
+                </p>
+                <p class="text-end text-xs tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-percentageCompletedGoal">
+                    58%
+                </p>
+            </div>
+
+            <hr class="w-full border border-zinc-900">
+
+            <div class="flex flex-wrap items-center gap-2">
+                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] bg-zinc-950 border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal js-goalFinish">
+                    <img class="w-4 h-4 tablet:w-6 tablet:h-6" src="src/images/plus grey.svg" alt="sinal de mais">
+                    Acordar cedo
+                </button>
+                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal">
+                    <img class="w-4 h-4 tablet:w-6 tablet:h-6" src="src/images/plus grey.svg" alt="sinal de mais">
+                    Estudar
+                </button>
+            </div>
+
+            <section class="flex flex-col gap-6">
+                <h2 class="font-medium text-[1.4rem] leading-[1.8rem] text-zinc-100 tablet:text-[1.6rem] tablet:leading-[2rem]">
+                    Sua semana
+                </h2>
+                <p class="hidden text-zinc-400 text-[0.875rem] leading-[1.25rem] js-notCompletedGoal">
+                    Você ainda não completou nenhuma meta essa semana.
+                </p>
+
+                <div class="flex flex-col justify-center gap-3">
+                    <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
+                        Hoje
+                        <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
+                            (06 de Agosto)
+                        </span>
+                    </h3>
+
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<b class="font-normal text-zinc-100">Acordar cedo</b>”
+                            às 
+                            <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                08:13h
+                            </span>
+                        </p>
+                    </figure>
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<b class="font-normal text-zinc-100">Estudar</b>”
+                            às 
+                            <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                14:08h
+                            </span>
+                        </p>
+                    </figure>
+
+                </div>
+
+                <div class="flex flex-col justify-center gap-3">
+                    <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
+                        Ontem
+                        <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
+                            (05 de Agosto)
+                        </span>
+                    </h3>
+
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<b class="font-normal text-zinc-100">Acordar cedo</b>”
+                            às 
+                            <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                08:13h
+                            </span>
+                        </p>
+                    </figure>
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<b class="font-normal text-zinc-100">Estudar</b>”
+                            às 
+                            <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                14:08h
+                            </span>
+                        </p>
+                    </figure>
+
+                </div>
+
+            </section>
+           
+        </section>
+
+    </main>
+
+</body>
+</html>

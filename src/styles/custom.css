@@ -1,0 +1,35 @@
+:root{
+    --pink-500: #EC4899;
+    --shadow-input-focus: rgba(237, 100, 192, 0.1);
+
+    --bg-label-checked: rgba(139, 92, 246, 0.05);
+}
+
+.custom-shadow:focus {
+    box-shadow: 0 0 0 4px var(--shadow-input-focus);
+}
+
+input[type="radio"]:checked + label{
+    border: 1px solid var(--pink-500);
+    background-color: var(--bg-label-checked);
+} 
+
+/* javascript class */
+
+.js-activeSection{
+    display: flex;
+}
+
+.js-menuOpened{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+
+    filter: none;
+}
+
+.js-goalFinish{
+    pointer-events: none;
+    opacity: 0.5;
+}
