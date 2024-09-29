@@ -1,3 +1,17 @@
+import goals from './script.js';
+
+const sectionGoal = document.querySelector('.js-sectionGoal');
+const sectionInit = document.querySelector('.js-sectionInit');
+const classSectionActive = 'js-activeSection';
+
+if(sectionGoal && sectionInit){
+    if(!goals.length){
+        sectionInit.classList.add(classSectionActive);
+    } else {
+        sectionGoal.classList.add(classSectionActive);    
+    }    
+}
+
 window.addEventListener('load', () => {
     function initCreateGoal(){
         const sectionCreateMeta = document.querySelector('.js-sectionGoalMenu');
