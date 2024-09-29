@@ -5,7 +5,7 @@ const sectionInit = document.querySelector('.js-sectionInit');
 const classSectionActive = 'js-activeSection';
 
 if(sectionGoal && sectionInit){
-    if(!goals.length){
+    if(!goals.length || !goals){
         sectionInit.classList.add(classSectionActive);
     } else {
         sectionGoal.classList.add(classSectionActive);    
@@ -31,7 +31,7 @@ if(firstDayOfWeek.format('MM') != lastDayOfWeek.format('MM')){
 }
 
 // goal é o objeto dentro do array
-// esse for é usado quando n é necessário o número do array para manipular ele
+// esse for é usado quando n é necessário o número do array para manipular o que deseja
 for (const goal of goals){
 
     const sectionCompletedGoal = document.querySelector('.js-completedGoal');
