@@ -33,3 +33,9 @@ input[type="radio"]:checked + label{
     pointer-events: none;
     opacity: 0.5;
 }
+
+.js-haveCompletedGoal{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
