@@ -1,3 +1,11 @@
+// const dayjs = require("dayjs");
+// require('../../node_modules/dayjs/locale/pt-br')
+// import dayjs from '/node_modules/dayjs/dayjs.min.js';
+// import '/node_modules/dayjs/locale/pt-br.js'
+
+dayjs.locale('pt-br');
+console.log(dayjs());
+
 let goals = [];
 
 goals = [{
