@@ -152,10 +152,10 @@
 
         <section class="hidden flex-col gap-6 max-w-[600px] mx-auto my-0 py-10 px-5 js-sectionGoal">
 
-            <div class="flex items-center justify-between gap-3">
+            <header class="flex items-center justify-between flex-wrap gap-3">
                 <figure class="w-fit flex items-center gap-3">
                     <img class="w-6 h-6" src="src/images/icon inOrbit.svg" alt="in.orbit">
-                    <h1 class="font-semibold text-zinc-50 text-[1.125rem] leading-[1.4rem] js-weekTitle">
+                    <h1 class="font-semibold text-zinc-50 text-[1.125rem] leading-[1.4rem] js-titleHeader">
                         05 a 12 de Agosto
                     </h1>
                 </figure>
@@ -163,7 +163,7 @@
                     <img class="w-4 h-4" src="src/images/plus white.svg" alt="sinal de mais">
                     Cadastrar meta
                 </button>
-            </div>
+            </header>
 
             <div class="grid gap-3 grid-rows-[20px_auto]">
                 <div class="col-span-2 w-full h-2 bg-zinc-900 rounded-full relative">
@@ -172,9 +172,9 @@
 
                 <p class="text-[0.75rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400">
                     Você completou 
-                    <b class="font-normal text-zinc-100 js-completedGoal">8</b> 
+                    <b class="font-normal text-zinc-100 js-completedGoalNumber">8</b> 
                     de 
-                    <b class="font-normal text-zinc-100 js-totalGoal">15</b> 
+                    <b class="font-normal text-zinc-100 js-totalGoalNumber">15</b> 
                     metas nessa semana.
                 </p>
                 <p class="text-end text-xs tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-percentageCompletedGoal">
@@ -195,81 +195,85 @@
                 </button>
             </div>
 
-            <section class="flex flex-col gap-6">
+            <div class="flex flex-col gap-6">
                 <h2 class="font-medium text-[1.4rem] leading-[1.8rem] text-zinc-100 tablet:text-[1.6rem] tablet:leading-[2rem]">
                     Sua semana
                 </h2>
-                <p class="hidden text-zinc-400 text-[0.875rem] leading-[1.25rem] js-notCompletedGoal">
+                <p class="text-zinc-400 text-[0.875rem] leading-[1.25rem] js-notCompletedGoal">
                     Você ainda não completou nenhuma meta essa semana.
                 </p>
 
-                <div class="flex flex-col justify-center gap-3">
-                    <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
-                        Hoje
-                        <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
-                            (06 de Agosto)
-                        </span>
-                    </h3>
+                <section class="hidden js-completedGoal">
 
-                    <figure class="flex items-center gap-2">
-                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
-                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
-                            Você completou 
-                            “<b class="font-normal text-zinc-100">Acordar cedo</b>”
-                            às 
-                            <span class="font-normal text-zinc-100 js-completedInfoHour">
-                                08:13h
+                    <div class="flex flex-col justify-center gap-3 js-completeGoal">
+                        <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
+                            Hoje
+                            <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
+                                (06 de Agosto)
                             </span>
-                        </p>
-                    </figure>
-                    <figure class="flex items-center gap-2">
-                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
-                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
-                            Você completou 
-                            “<b class="font-normal text-zinc-100">Estudar</b>”
-                            às 
-                            <span class="font-normal text-zinc-100 js-completedInfoHour">
-                                14:08h
+                        </h3>
+    
+                        <figure class="flex items-center gap-2">
+                            <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                            <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                                Você completou 
+                                “<b class="font-normal text-zinc-100">Acordar cedo</b>”
+                                às 
+                                <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                    08:13h
+                                </span>
+                            </p>
+                        </figure>
+                        <figure class="flex items-center gap-2">
+                            <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                            <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                                Você completou 
+                                “<b class="font-normal text-zinc-100">Estudar</b>”
+                                às 
+                                <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                    14:08h
+                                </span>
+                            </p>
+                        </figure>
+    
+                    </div>
+    
+                    <div class="flex flex-col justify-center gap-3">
+                        <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
+                            Ontem
+                            <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
+                                (05 de Agosto)
                             </span>
-                        </p>
-                    </figure>
+                        </h3>
+    
+                        <figure class="flex items-center gap-2">
+                            <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                            <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                                Você completou 
+                                “<b class="font-normal text-zinc-100">Acordar cedo</b>”
+                                às 
+                                <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                    08:13h
+                                </span>
+                            </p>
+                        </figure>
+                        <figure class="flex items-center gap-2">
+                            <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                            <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                                Você completou 
+                                “<b class="font-normal text-zinc-100">Estudar</b>”
+                                às 
+                                <span class="font-normal text-zinc-100 js-completedInfoHour">
+                                    14:08h
+                                </span>
+                            </p>
+                        </figure>
+    
+                    </div>
 
-                </div>
+                </section>
 
-                <div class="flex flex-col justify-center gap-3">
-                    <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-completedInfoDay">
-                        Ontem
-                        <span class="text-[0.875rem] leading-[1rem] tablet:text-[1rem] tablet:leading-[1.4rem] text-zinc-400 js-dateGoal">
-                            (05 de Agosto)
-                        </span>
-                    </h3>
-
-                    <figure class="flex items-center gap-2">
-                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
-                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
-                            Você completou 
-                            “<b class="font-normal text-zinc-100">Acordar cedo</b>”
-                            às 
-                            <span class="font-normal text-zinc-100 js-completedInfoHour">
-                                08:13h
-                            </span>
-                        </p>
-                    </figure>
-                    <figure class="flex items-center gap-2">
-                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
-                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
-                            Você completou 
-                            “<b class="font-normal text-zinc-100">Estudar</b>”
-                            às 
-                            <span class="font-normal text-zinc-100 js-completedInfoHour">
-                                14:08h
-                            </span>
-                        </p>
-                    </figure>
-
-                </div>
-
-            </section>
+            </div>
            
         </section>
 
@@ -278,5 +282,6 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/pt-br.js"></script>
     <script src="src/javascript/script.js"></script>
+    <script src="src/javascript/eventsHandlers.js"></script>
 </body>
 </html>
