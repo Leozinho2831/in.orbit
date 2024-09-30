@@ -37,12 +37,12 @@
                 <div>
                     <figure class="flex w-[100%] justify-between gap-7">
                         <h1 class="font-semibold text-zinc-50 text-[1.125rem] leading-[1.4rem] ">Cadastrar meta</h1>
-                        <img class="w-5 h-5 cursor-pointer js-closeMenu" src="src/images/close create goal.svg" alt="fechar menu" onclick="closeCreateGoal(event);">
+                        <img class="w-5 h-5 cursor-pointer js-closeMenu" src="src/images/close create goal.svg" alt="fechar menu" onclick="closeCreateGoal();">
                     </figure>
                     <p class="mt-3 col-span-2 text-zinc-400 text-[0.875rem] leading-[1.25rem]">
                         Adicione atividades que 
                         <span class="border-b-2 border-zinc-300">te fazem bem
-                        </span> 
+                        </span>
                         e que você quer continuar praticando toda semana.
                     </p>
                 </div>
@@ -143,10 +143,10 @@
             </div>
             
             <div class="flex items-center gap-3">
-                <button class="flex-1 flex items-center justify-center px-4 py-3 rounded-lg bg-zinc-900 font-medium text-[0.875rem] leading-[1rem] text-zinc-400" onclick="closeCreateGoal(event);">
+                <button class="flex-1 flex items-center justify-center px-4 py-3 rounded-lg bg-zinc-900 font-medium text-[0.875rem] leading-[1rem] text-zinc-400" onclick="closeCreateGoal();">
                     Fechar
                 </button>
-                <button class="flex-1 flex items-center justify-center px-4 py-3 bg-violet-500 font-medium text-[0.875rem] leading-[1rem] text-violet-50 rounded-lg transition-all duration-75 hover:bg-violet-600 js-createGoalButton" type="submit" onclick="createGoal(event);">
+                <button class="flex-1 flex items-center justify-center px-4 py-3 bg-violet-500 font-medium text-[0.875rem] leading-[1rem] text-violet-50 rounded-lg transition-all duration-75 hover:bg-violet-600 js-createGoalButton" type="submit" onclick="createGoal(event), closeCreateGoal();">
                     Salvar
                 </button>
             </div>
