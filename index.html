@@ -183,12 +183,7 @@
 
             <hr class="w-full border border-zinc-900">
 
-            <div class="flex flex-wrap items-center gap-2">
-                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] bg-zinc-950 border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal-0">
-                    <img class="w-4 h-4 tablet:w-6 tablet:h-6" src="src/images/plus grey.svg" alt="sinal de mais">
-                    <span></span>
-                </button>
-            </div>
+            <div class="flex flex-wrap items-center gap-2 js-containerButtonsGoal"></div>
 
             <div class="flex flex-col gap-6">
                 <h2 class="font-medium text-[1.4rem] leading-[1.8rem] text-zinc-100 tablet:text-[1.6rem] tablet:leading-[2rem]">
@@ -200,7 +195,7 @@
 
                 <section class="hidden js-completedGoal">
 
-                    <div class="flex flex-col justify-center gap-3 js-completeGoal">
+                    <!-- <div class="flex flex-col justify-center gap-3 js-completeGoal">
                         <h3 class="mb-1 text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-dateGoal"></h3>
     
                         <figure class="flex items-center gap-2">
@@ -212,8 +207,7 @@
                                 <span class="font-normal text-zinc-100 js-completedInfoHour-0"></span>
                             </p>
                         </figure>
-    
-                    </div>
+                    </div> -->
 
                 </section>
 
@@ -227,9 +221,9 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/pt-br.js"></script>
 
-    <script type="module" src="src/javascript/create-goal.js"></script>
     <script type="module" src="src/javascript/script.js"></script>
-    <script type="module" src="src/javascript/events-handlers.js"></script>
     <script type="module" src="src/javascript/completed-goal.js"></script>
+    <script type="module" src="src/javascript/create-goal.js"></script>
+    <script type="module" src="src/javascript/events-handlers.js"></script>
 </body>
 </html>
