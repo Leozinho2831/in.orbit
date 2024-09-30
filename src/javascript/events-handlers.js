@@ -55,12 +55,3 @@ window.addEventListener('load', () => {
     
     initSelectRadio();
 });
-
-// não esquecer de usar essa função na hora de desativar o botão após completar todas as vezes a meta
-function disableButtonGoal(){
-    const buttonsDisabled = document.querySelector('.js-goalFinish');
-
-    buttonsDisabled.disabled = true;
-}
-
-disableButtonGoal();
