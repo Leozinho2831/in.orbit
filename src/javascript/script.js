@@ -1,11 +1,11 @@
-const goals = JSON.parse(localStorage.getItem('goalsArray'));
+const getGoals = JSON.parse(localStorage.getItem('goalsArray'));
 
 const sectionGoal = document.querySelector('.js-sectionGoal');
 const sectionInit = document.querySelector('.js-sectionInit');
 const classSectionActive = 'js-activeSection';
 
 if(sectionGoal && sectionInit){
-    if(!goals || !goals.length){
+    if(!getGoals || !getGoals.length){
         sectionInit.classList.add(classSectionActive);
     } else {
         sectionGoal.classList.add(classSectionActive); 
@@ -35,14 +35,15 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') { 
         localStorage.removeItem('goalsArray');
         localStorage.removeItem('containerButtonsGoal');
+        localStorage.removeItem('barCompletedGoalValues');
         window.location.reload();
     }
 });
 
 // goal é o objeto dentro do array
 // esse for é usado quando n é necessário o número do array para manipular o que deseja
-if(goals){
-    for (const goal of goals){
+if(getGoals){
+    for (const goal of getGoals){
 
         const sectionCompletedGoal = document.querySelector('.js-completedGoal');
         const classSectionCompletedGoal = 'js-haveCompletedGoal';
