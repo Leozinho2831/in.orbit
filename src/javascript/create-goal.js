@@ -19,7 +19,7 @@ function createGoal(event){
                 id: goals.length,
                 title: inputTitleGoal.value,
                 desiredFrequency: radioCheckedGoal.value,
-                createGoalDate: dayjs().format('DD MM'),
+                createGoalDate: dayjs().format('DD MM YYYY'),
                 completed: 1,
                 completedHour: undefined,
             }
