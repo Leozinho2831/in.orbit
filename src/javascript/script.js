@@ -8,7 +8,7 @@ if(sectionGoal && sectionInit){
     if(!goals || !goals.length){
         sectionInit.classList.add(classSectionActive);
     } else {
-        sectionGoal.classList.add(classSectionActive);    
+        sectionGoal.classList.add(classSectionActive); 
     }    
 }
 
@@ -33,7 +33,8 @@ if(firstDayOfWeek.format('MM') != lastDayOfWeek.format('MM')){
 // somente para debugar enquanto está em produção
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') { 
-        localStorage.clear();
+        localStorage.removeItem('goalsArray');
+        localStorage.removeItem('containerButtonsGoal');
         window.location.reload();
     }
 });
