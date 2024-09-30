@@ -6,6 +6,26 @@ if(storedGoalsArray){
     goals = storedGoalsArray;
 }
 
+function createButtonToCompleteGoal(){
+    const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
+
+    goals.forEach((goal) => {
+        const verifyButtonExist = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
+        
+        if(!verifyButtonExist){
+            containerButtonsGoal.innerHTML = 
+            `
+                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] bg-zinc-950 border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal-${goal.id}" onclick="createInfoGoalCompleted();">
+                    <img class="w-4 h-4 tablet:w-6 tablet:h-6" src="src/images/plus grey.svg" alt="sinal de mais">
+                    <span>${goal.title}</span>
+                </button>
+            ` + containerButtonsGoal.innerHTML;
+        }
+    });
+
+    localStorage.setItem('containerButtonsGoal', containerButtonsGoal.innerHTML);
+}
+
 function createGoal(event){
     event.preventDefault();
 
@@ -26,9 +46,11 @@ function createGoal(event){
         );
     
         localStorage.setItem('goalsArray', JSON.stringify(goals));
-        
-        window.location.reload();
 
+        createButtonToCompleteGoal();
+
+        window.location.reload();
+        
     } else {
 
         const classInputRequired = 'js-required';
