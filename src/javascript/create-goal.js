@@ -1,3 +1,5 @@
+import barCompletedGoals from './completed-goal.js';
+
 let goals = [];
 
 const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
@@ -44,12 +46,20 @@ function createGoal(event){
                 completedHour: undefined,
             }
         );
-    
+
         localStorage.setItem('goalsArray', JSON.stringify(goals));
 
         createButtonToCompleteGoal();
 
-        window.location.reload();
+        const sectionInit = document.querySelector('.js-sectionInit');
+        const classSectionActive = 'js-activeSection';
+
+        if(sectionInit.classList.contains(classSectionActive)){
+            barCompletedGoals();
+            window.location.reload();
+        } else {
+            barCompletedGoals();
+        }
 
     } else {
 
