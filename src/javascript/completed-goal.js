@@ -7,36 +7,45 @@ if(goals){
     }
 }
 
-const barCompletedGoal = document.querySelector('.js-completedGoalBar');
-const classBarCompleted = 'js-completedPorcent';
+function barCompletedGoals(){
+    const barCompletedGoal = document.querySelector('.js-completedGoalBar');
 
-let goalCompletedTotal = 0;
-let totalGoals = 0;
+    let goalCompletedTotal = 0;
+    let totalGoals = 0;
 
-if(goals){
-    goals.forEach((goal) => {
-        goalCompletedTotal += goal.completed;
-        totalGoals += Number(goal.desiredFrequency);
-    });
+    if(goals){
+        goals.forEach((goal) => {
+            goalCompletedTotal += goal.completed;
+            totalGoals += Number(goal.desiredFrequency);
+        });
+    }
+
+    const porcentCompleted = Math.round((100 * goalCompletedTotal) / totalGoals);
+
+    barCompletedGoal.style.width = `${porcentCompleted}%`;
+
+    const infoCompletedGoalNumber = document.querySelector('.js-completedGoalNumber');
+    const infoTotalGoalNumber = document.querySelector('.js-totalGoalNumber');
+    const infoPorcentCompleted = document.querySelector('.js-percentageCompletedGoal');
+
+    infoCompletedGoalNumber.textContent = goalCompletedTotal;
+    infoTotalGoalNumber.textContent = totalGoals;
+    infoPorcentCompleted.textContent = `${porcentCompleted}%`;
 }
 
-const porcentCompleted = Math.round((100 * goalCompletedTotal) / totalGoals);
-
-barCompletedGoal.style.width = `${porcentCompleted}%`;
-
-const infoCompletedGoalNumber = document.querySelector('.js-completedGoalNumber');
-const infoTotalGoalNumber = document.querySelector('.js-totalGoalNumber');
-const infoPorcentCompleted = document.querySelector('.js-percentageCompletedGoal');
-
-infoCompletedGoalNumber.textContent = goalCompletedTotal;
-infoTotalGoalNumber.textContent = totalGoals;
-infoPorcentCompleted.textContent = `${porcentCompleted}%`;
+barCompletedGoals();
 
 const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
 const containerButtonsGoalStorage = localStorage.getItem('containerButtonsGoal');
 
 if(containerButtonsGoalStorage){
     containerButtonsGoal.innerHTML = containerButtonsGoalStorage;
+}
+
+function createInfoGoalCompleted(){
+    goals.forEach((goal) => {
+        console.log('ta funfando', goal.completed)
+    });
 }
 
 function completedGoal(){
@@ -52,15 +61,14 @@ function completedGoal(){
 
             const buttonsDisabled = document.querySelector('.js-goalFinish');
             buttonsDisabled.disabled = true;
+        } else {
+            goal.completed++;
+            createInfoGoalCompleted();
+            barCompletedGoals();
         }
     });
 
 }
 
 window.completedGoal = completedGoal;
-
-function createInfoGoalCompleted(){
-    
-}
-
 // window.createInfoGoalCompleted = createInfoGoalCompleted;
