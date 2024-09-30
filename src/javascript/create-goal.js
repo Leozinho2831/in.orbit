@@ -1,16 +1,16 @@
 let goals = [];
 
-const storedGoalsArray = localStorage.getItem('goalsArray');
+const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
 
 if(storedGoalsArray){
-    goals = storedGoalsArray
+    goals = storedGoalsArray;
 }
 
 function createGoal(event){
     event.preventDefault();
 
-    window.inputTitleGoal = document.querySelector('.js-titleGoal');
-    window.radioCheckedGoal = document.querySelector('.js-desiredFrequency:checked');
+    const inputTitleGoal = document.querySelector('.js-titleGoal');
+    const radioCheckedGoal = document.querySelector('.js-desiredFrequency:checked');
 
     if(inputTitleGoal.value && radioCheckedGoal.value){
 
@@ -19,8 +19,9 @@ function createGoal(event){
                 id: goals.length,
                 title: inputTitleGoal.value,
                 desiredFrequency: radioCheckedGoal.value,
-                completed: 0,
-                completedHour: dayjs().format('HH[:]mm[h]'),
+                createGoalDate: dayjs().format('DD MM'),
+                completed: 1,
+                completedHour: undefined,
             }
         );
     
