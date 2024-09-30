@@ -1,8 +1,10 @@
 const goals = JSON.parse(localStorage.getItem('goalsArray'));
 
 // para debug
-if (dayjs(goals[0].createGoalDate, 'DD MM YYYY').isBefore(dayjs('30 09 2024', 'DD MM YYYY'))) {
-    localStorage.clear();
+if(goals){
+    if (dayjs(goals[0].createGoalDate, 'DD MM YYYY').isBefore(dayjs('30 09 2024', 'DD MM YYYY'))) {
+        localStorage.removeItem('goalsArray');
+    }
 }
 
 const barCompletedGoal = document.querySelector('.js-completedGoalBar');
@@ -30,55 +32,35 @@ infoCompletedGoalNumber.textContent = goalCompletedTotal;
 infoTotalGoalNumber.textContent = totalGoals;
 infoPorcentCompleted.textContent = `${porcentCompleted}%`;
 
-goals.forEach((goal) => {
-    const buttonCompleteGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
+const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
+const containerButtonsGoalStorage = localStorage.getItem('containerButtonsGoal');
 
-    buttonCompleteGoal.children[1].textContent = goal.title;
-});
-
-function disableButtonGoal(){
-    const buttonsDisabled = document.querySelector('.js-goalFinish');
-    
-    buttonsDisabled.disabled = true;
+if(containerButtonsGoalStorage){
+    containerButtonsGoal.innerHTML = containerButtonsGoalStorage;
 }
 
 function completedGoal(){
+
     goals.forEach((goal) => {
         const buttonCompleteGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
         const classButtonFinish = 'js-goalFinish';
 
+        goal.completedHour = dayjs().format('HH[:]mm[h]');
+
         if(goal.completed == goal.desiredFrequency){
             buttonCompleteGoal.classList.add(classButtonFinish);
-            disableButtonGoal();
+
+            const buttonsDisabled = document.querySelector('.js-goalFinish');
+            buttonsDisabled.disabled = true;
         }
     });
+
 }
 
 window.completedGoal = completedGoal;
 
-const today = dayjs().format('ddd[,] DD [de] MMM');
-
-const dateGoalCompleted = document.querySelector('.js-dateGoal');
-
-dateGoalCompleted.textContent = today;
-
-if(goals){
-    goals.forEach((goal) => {
-
-        const titleCompletedGoal = document.querySelector(`.js-titleGoalCompleted-${goal.id}`);
-        const infoCompletedHour = document.querySelector(`.js-completedInfoHour-${goal.id}`);
-
-        if(titleCompletedGoal && goal.title){
-            titleCompletedGoal.textContent = goal.title;
-        } else {
-            titleCompletedGoal.textContent = 'Deu erro, reporte ao proprietário';
-        }
-
-        if(infoCompletedHour && goal.completedHour){
-            infoCompletedHour.textContent = goal.completedHour;
-        } else {
-            infoCompletedHour.textContent = 'Deu erro, reporte ao proprietário';
-        }
-
-    });
+function createInfoGoalCompleted(){
+    
 }
+
+// window.createInfoGoalCompleted = createInfoGoalCompleted;
