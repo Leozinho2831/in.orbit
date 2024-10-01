@@ -1,3 +1,21 @@
+// determinar as datas no padrão brasileiro
+dayjs.locale('pt-br');
+
+// determinar o texto do header
+const firstDayOfWeek = dayjs().startOf('week');
+const lastDayOfWeek = dayjs().endOf('week');
+
+const titleHeader = document.querySelector('.js-titleHeader');
+
+// colchetes para usar string sem ser comandos do format do dayjs
+if(firstDayOfWeek.format('MM') != lastDayOfWeek.format('MM')){
+    titleHeader.textContent = 
+    `${firstDayOfWeek.format('DD [de] MMMM [à]')} ${lastDayOfWeek.format('DD [de] MMMM')}`;
+} else {
+    titleHeader.textContent = 
+    `${firstDayOfWeek.format('DD [à]')} ${lastDayOfWeek.format('DD [de] MMMM')}`;
+}
+
 let goals = [];
 
 const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
@@ -90,20 +108,73 @@ function barCompletedGoals(){
     infoCompletedGoals.textContent = totalGoalsCompleted;
     infoTotalGoals.textContent = totalGoals;
     infoPorcentageCompletedGoals.textContent = `${porcentageCompletedCalc}%`;
-
-    const saveValuesHeader = 
-    {
-        totalGoalsSave: totalGoals,
-        totalGoalsCompletedSave: totalGoalsCompleted,
-        porcetageCompletedSave: porcentageCompletedCalc,
-    }
-
-    localStorage.setItem('saveValuesHeader', saveValuesHeader);
 }
 
 barCompletedGoals();
 
 window.barCompletedGoals = barCompletedGoals;
+
+const containerInfoCompletedGoal = document.querySelector('.js-containerInfoCompletedGoal');
+const textNotCompletedGoal = document.querySelector('.js-notCompletedGoal');
+
+const storagedContainerInfoCompletedGoal = 
+localStorage.getItem('containerInfoCompletedGoal');
+
+if(storagedContainerInfoCompletedGoal){
+    containerInfoCompletedGoal.innerHTML = storagedContainerInfoCompletedGoal;
+
+    textNotCompletedGoal.style.display = 'none';
+}
+
+function addInfoCompletedGoal(){
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+
+    if(storedGoalsArray){
+        goals = storedGoalsArray;
+    }
+
+    const completedDateTitle = dayjs().format('ddd[,] DD [de] MMM');
+    
+    goals.forEach((goal) => {
+        const titleInfoCompletedGoal = document.querySelector(`.js-dateCompletedGoal-${goal.completedDate}`);
+
+        if(titleInfoCompletedGoal){
+            containerInfoCompletedGoal.innerHTML += 
+            `
+            <figure class="flex items-center gap-2">
+                <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                    Você completou 
+                    “<span class="font-normal text-zinc-100 js-titleGoalCompleted-0">${goal.title}</span>”
+                    às 
+                    <span class="font-normal text-zinc-100 js-completedInfoHour-0">${goal.completedHour}</span>
+                </p>
+            </figure>
+            `;
+        } else {
+            containerInfoCompletedGoal.innerHTML = 
+            `
+            <div class="flex flex-col justify-center gap-3 js-completeGoal-01-10-2023">
+                <h3 class="mb-1 first-letter:uppercase text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-dateCompletedGoal-${goal.completedDate}">${completedDateTitle}</h3>
+            
+                <figure class="flex items-center gap-2">
+                    <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                    <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                        Você completou 
+                        “<span class="font-normal text-zinc-100 js-titleGoalCompleted-0">${goal.title}</span>”
+                        às 
+                        <span class="font-normal text-zinc-100 js-completedInfoHour-0">${goal.completedHour}</span>
+                    </p>
+                </figure>
+            </div>
+            ` + containerInfoCompletedGoal.innerHTML;
+        }
+
+        localStorage.setItem('containerInfoCompletedGoal', containerInfoCompletedGoal.innerHTML);
+    });
+    
+    textNotCompletedGoal.style.display = 'none';
+}
 
 function completedGoal(){
     const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
@@ -114,17 +185,26 @@ function completedGoal(){
 
     goals.forEach((goal) => {
         const buttonToCompletedGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
+        const classButtonDisabled = 'js-goalFinish';
+
         goal.completed++;
+        goal.completedDate = dayjs().format('DD-MM-YYYY');
+        goal.completedHour = dayjs().format('HH:mm[h]');
 
         localStorage.setItem('goalsArray', JSON.stringify(goals));
         
         if(goal.completed == goal.desiredFrequency){
             barCompletedGoals();
             buttonToCompletedGoal.disabled = true;
+            buttonToCompletedGoal.classList.add(classButtonDisabled);
 
             localStorage.setItem('containerButtonsGoal', containerButtonsGoal.innerHTML);
+
+            addInfoCompletedGoal();
         } else {
             barCompletedGoals();
+
+            addInfoCompletedGoal();
         }
     });
 }
@@ -150,8 +230,8 @@ function createGoal(event){
                 id: goals.length,
                 title: inputTitleGoal.value,
                 desiredFrequency: radioCheckedGoal.value,
-                createGoalDate: dayjs().format('DD MM YYYY'),
                 completed: 0,
+                completedDate: undefined,
                 completedHour: undefined,
             }
         );
