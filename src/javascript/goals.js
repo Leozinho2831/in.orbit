@@ -1,5 +1,3 @@
-import barCompletedGoals from './completed-goal.js';
-
 let goals = [];
 
 const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
@@ -26,6 +24,58 @@ function createButtonToCompleteGoal(){
     });
 
     localStorage.setItem('containerButtonsGoal', containerButtonsGoal.innerHTML);
+}
+
+const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
+const containerButtonsGoalStorage = localStorage.getItem('containerButtonsGoal');
+
+if(containerButtonsGoalStorage){
+    containerButtonsGoal.innerHTML = containerButtonsGoalStorage;
+}
+
+function barCompletedGoals(){
+
+    let goalCompletedTotal = 0;
+    let totalGoals = 0;
+
+    if(goals){
+        goals.forEach((goal) => {
+            goalCompletedTotal += Number(goal.completed);
+            totalGoals += Number(goal.desiredFrequency);
+        });
+    }
+
+    let porcentCompleted = totalGoals > 0 ? Math.round((100 * goalCompletedTotal) / totalGoals) : 0;
+
+    const getValuesBar = JSON.parse(localStorage.getItem('barCompletedGoalValues'));
+
+    if(getValuesBar){
+        goalCompletedTotal = getValuesBar.infoCompletedGoal;
+        totalGoals = getValuesBar.infoTotalGoals;
+
+        porcentCompleted = getValuesBar.infoPorcentCompleted;
+    }
+
+    const barCompletedGoal = document.querySelector('.js-completedGoalBar');
+
+    const infoCompletedGoalNumber = document.querySelector('.js-completedGoalNumber');
+    const totalGoalsNumber = document.querySelector('.js-totalGoalNumber');
+    const infoPorcentCompleted = document.querySelector('.js-percentageCompletedGoal');
+
+    infoCompletedGoalNumber.textContent = `${goalCompletedTotal}`;
+    totalGoalsNumber.textContent = `${totalGoals}`;
+    infoPorcentCompleted.textContent = `${porcentCompleted}%`;
+
+    barCompletedGoal.style.width = `${porcentCompleted}%`;
+
+    const saveValuesBar = 
+    {
+        infoCompletedGoal: goalCompletedTotal || 0,
+        infoTotalGoals: totalGoals || 0,
+        infoPorcentCompleted: porcentCompleted || 0,
+    }
+
+    localStorage.setItem('barCompletedGoalValues', JSON.stringify(saveValuesBar));
 }
 
 function createGoal(event){
@@ -92,3 +142,27 @@ function createGoal(event){
 }
 
 window.createGoal = createGoal;
+
+function completedGoal(){
+
+    goals.forEach((goal) => {
+        const buttonCompleteGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
+        const classButtonFinish = 'js-goalFinish';
+        goal.completed++;
+
+        goal.completedHour = dayjs().format('HH[:]mm[h]');
+
+        if(goal.completed == goal.desiredFrequency){
+            barCompletedGoals();
+            buttonCompleteGoal.classList.add(classButtonFinish);
+
+            const buttonsDisabled = document.querySelector('.js-goalFinish');
+            buttonsDisabled.disabled = true;
+        } else {
+            barCompletedGoals();
+        }
+    });
+
+}
+
+window.completedGoal = completedGoal;
