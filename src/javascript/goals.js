@@ -6,6 +6,22 @@ if(storedGoalsArray){
     goals = storedGoalsArray;
 }
 
+function verifySection(){
+    const sectionGoal = document.querySelector('.js-sectionGoal');
+    const sectionInit = document.querySelector('.js-sectionInit');
+    const classSectionActive = 'js-activeSection';
+
+    if(sectionGoal && sectionInit){
+        if(!goals || !goals.length){
+            sectionInit.classList.add(classSectionActive);
+        } else {
+            sectionGoal.classList.add(classSectionActive); 
+        }    
+    }
+}
+
+verifySection();
+
 function createButtonToCompleteGoal(){
     const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
 
@@ -45,7 +61,7 @@ function barCompletedGoals(){
         });
     }
 
-    let porcentCompleted = totalGoals > 0 ? Math.round((100 * goalCompletedTotal) / totalGoals) : 0;
+    let porcentCompleted = Math.round((100 * goalCompletedTotal) / totalGoals);
 
     const getValuesBar = JSON.parse(localStorage.getItem('barCompletedGoalValues'));
 
@@ -100,16 +116,8 @@ function createGoal(event){
         localStorage.setItem('goalsArray', JSON.stringify(goals));
 
         createButtonToCompleteGoal();
-
-        const sectionInit = document.querySelector('.js-sectionInit');
-        const classSectionActive = 'js-activeSection';
-
-        if(sectionInit.classList.contains(classSectionActive)){
-            barCompletedGoals();
-            window.location.reload();
-        } else {
-            barCompletedGoals();
-        }
+        barCompletedGoals();
+        verifySection();
 
     } else {
 
