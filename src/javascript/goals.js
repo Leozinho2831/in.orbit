@@ -7,6 +7,12 @@ if(storedGoalsArray){
 }
 
 function verifySection(){
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+
+    if(storedGoalsArray){
+        goals = storedGoalsArray;
+    }
+
     const sectionGoal = document.querySelector('.js-sectionGoal');
     const sectionInit = document.querySelector('.js-sectionInit');
     const classSectionActive = 'js-activeSection';
@@ -14,8 +20,10 @@ function verifySection(){
     if(sectionGoal && sectionInit){
         if(!goals || !goals.length){
             sectionInit.classList.add(classSectionActive);
+            sectionGoal.classList.remove(classSectionActive);
         } else {
             sectionGoal.classList.add(classSectionActive); 
+            sectionInit.classList.remove(classSectionActive);
         }    
     }
 }
@@ -23,6 +31,12 @@ function verifySection(){
 verifySection();
 
 function createButtonToCompleteGoal(){
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+
+    if(storedGoalsArray){
+        goals = storedGoalsArray;
+    }
+
     const containerButtonsGoal = document.querySelector('.js-containerButtonsGoal');
 
     goals.forEach((goal) => {
@@ -50,52 +64,81 @@ if(containerButtonsGoalStorage){
 }
 
 function barCompletedGoals(){
-
-    let goalCompletedTotal = 0;
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+    
     let totalGoals = 0;
+    let totalGoalsCompleted = 0;
 
-    if(goals){
-        goals.forEach((goal) => {
-            goalCompletedTotal += Number(goal.completed);
+    if(storedGoalsArray){
+        storedGoalsArray.forEach((goal) => {
             totalGoals += Number(goal.desiredFrequency);
+            totalGoalsCompleted += Number(goal.completed);
         });
     }
 
-    let porcentCompleted = Math.round((100 * goalCompletedTotal) / totalGoals);
+    const porcentageCompletedCalc = 
+    totalGoals > 0 ? Math.floor((totalGoalsCompleted * 100) / totalGoals) : 0;
 
-    const getValuesBar = JSON.parse(localStorage.getItem('barCompletedGoalValues'));
+    const barCompletedGoals = document.querySelector('.js-completedGoalBar');
 
-    if(getValuesBar){
-        goalCompletedTotal = getValuesBar.infoCompletedGoal;
-        totalGoals = getValuesBar.infoTotalGoals;
+    const infoCompletedGoals = document.querySelector('.js-completedGoalNumber');
+    const infoTotalGoals = document.querySelector('.js-totalGoalNumber');
+    const infoPorcentageCompletedGoals = document.querySelector('.js-percentageCompletedGoal');
+    
+    barCompletedGoals.style.width = `${porcentageCompletedCalc}%`;
 
-        porcentCompleted = getValuesBar.infoPorcentCompleted;
-    }
+    infoCompletedGoals.textContent = totalGoalsCompleted;
+    infoTotalGoals.textContent = totalGoals;
+    infoPorcentageCompletedGoals.textContent = `${porcentageCompletedCalc}%`;
 
-    const barCompletedGoal = document.querySelector('.js-completedGoalBar');
-
-    const infoCompletedGoalNumber = document.querySelector('.js-completedGoalNumber');
-    const totalGoalsNumber = document.querySelector('.js-totalGoalNumber');
-    const infoPorcentCompleted = document.querySelector('.js-percentageCompletedGoal');
-
-    infoCompletedGoalNumber.textContent = `${goalCompletedTotal}`;
-    totalGoalsNumber.textContent = `${totalGoals}`;
-    infoPorcentCompleted.textContent = `${porcentCompleted}%`;
-
-    barCompletedGoal.style.width = `${porcentCompleted}%`;
-
-    const saveValuesBar = 
+    const saveValuesHeader = 
     {
-        infoCompletedGoal: goalCompletedTotal || 0,
-        infoTotalGoals: totalGoals || 0,
-        infoPorcentCompleted: porcentCompleted || 0,
+        totalGoalsSave: totalGoals,
+        totalGoalsCompletedSave: totalGoalsCompleted,
+        porcetageCompletedSave: porcentageCompletedCalc,
     }
 
-    localStorage.setItem('barCompletedGoalValues', JSON.stringify(saveValuesBar));
+    localStorage.setItem('saveValuesHeader', saveValuesHeader);
 }
+
+barCompletedGoals();
+
+window.barCompletedGoals = barCompletedGoals;
+
+function completedGoal(){
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+
+    if(storedGoalsArray){
+        goals = storedGoalsArray;
+    }
+
+    goals.forEach((goal) => {
+        const buttonToCompletedGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
+        goal.completed++;
+
+        localStorage.setItem('goalsArray', JSON.stringify(goals));
+        
+        if(goal.completed == goal.desiredFrequency){
+            barCompletedGoals();
+            buttonToCompletedGoal.disabled = true;
+
+            localStorage.setItem('containerButtonsGoal', containerButtonsGoal.innerHTML);
+        } else {
+            barCompletedGoals();
+        }
+    });
+}
+
+window.completedGoal = completedGoal;
 
 function createGoal(event){
     event.preventDefault();
+
+    const storedGoalsArray = JSON.parse(localStorage.getItem('goalsArray'));
+
+    if(storedGoalsArray){
+        goals = storedGoalsArray;
+    }
 
     const inputTitleGoal = document.querySelector('.js-titleGoal');
     const radioCheckedGoal = document.querySelector('.js-desiredFrequency:checked');
@@ -150,27 +193,3 @@ function createGoal(event){
 }
 
 window.createGoal = createGoal;
-
-function completedGoal(){
-
-    goals.forEach((goal) => {
-        const buttonCompleteGoal = document.querySelector(`.js-buttonCompleteGoal-${goal.id}`);
-        const classButtonFinish = 'js-goalFinish';
-        goal.completed++;
-
-        goal.completedHour = dayjs().format('HH[:]mm[h]');
-
-        if(goal.completed == goal.desiredFrequency){
-            barCompletedGoals();
-            buttonCompleteGoal.classList.add(classButtonFinish);
-
-            const buttonsDisabled = document.querySelector('.js-goalFinish');
-            buttonsDisabled.disabled = true;
-        } else {
-            barCompletedGoals();
-        }
-    });
-
-}
-
-window.completedGoal = completedGoal;
