@@ -1,17 +1,5 @@
 const getGoals = JSON.parse(localStorage.getItem('goalsArray'));
 
-const sectionGoal = document.querySelector('.js-sectionGoal');
-const sectionInit = document.querySelector('.js-sectionInit');
-const classSectionActive = 'js-activeSection';
-
-if(sectionGoal && sectionInit){
-    if(!getGoals || !getGoals.length){
-        sectionInit.classList.add(classSectionActive);
-    } else {
-        sectionGoal.classList.add(classSectionActive); 
-    }    
-}
-
 // colocar as datas seguindo padrão português brasileiro
 dayjs.locale('pt-br');
 
