@@ -17,10 +17,12 @@ input[type="radio"]:checked + label{
 
 /* javascript class */
 
+/* seção ativa */
 .js-activeSection{
     display: flex;
 }
 
+/* menu de criar metas aberto */
 .js-menuOpened{
     display: flex;
     flex-direction: column;
@@ -30,17 +32,13 @@ input[type="radio"]:checked + label{
     filter: none;
 }
 
+/* estilo botão quando completa todas as vezes da meta nesta semana */
 .js-goalFinish{
     pointer-events: none;
     opacity: 0.5;
 }
 
-.js-haveCompletedGoal{
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
+/* quando não a nome da meta */
 .js-requiredText{
     display: flex;
 }
