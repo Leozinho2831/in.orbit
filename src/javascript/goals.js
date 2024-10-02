@@ -1,3 +1,5 @@
+import closeCreateGoal from './events-handlers.js';
+
 // Determinar as datas no padrão brasileiro
 dayjs.locale('pt-br');
 
@@ -274,6 +276,9 @@ function createGoal(event){
 
         localStorage.setItem('goalsArray', JSON.stringify(goals));
 
+        inputTitleGoal.value = '';
+
+        closeCreateGoal();
         createButtonToCompleteGoal();
         barCompletedGoals();
         verifySection();
