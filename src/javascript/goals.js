@@ -1,5 +1,41 @@
-// determinar as datas no padrão brasileiro
+// Determinar as datas no padrão brasileiro
 dayjs.locale('pt-br');
+
+// limpar storage todo primeiro dia da semana
+const today = dayjs();
+const month = dayjs().format('MM');
+const year = dayjs().format('YYYY');
+
+// por problemas da biblioteca, tive que colocar dia entre mes e ano para conseguir a data corretamente
+const firstDayMonth = dayjs(`${month} 01 ${year}`);
+const firstDaySecondWeek = dayjs(firstDayMonth).add(2, 'week').startOf('week');
+
+function cleanStorage(){
+    let alreadyHadCleaning = false;
+
+    const getAlreadyCleaning = localStorage.getItem('cleaningStorage');
+
+    if(getAlreadyCleaning){
+        alreadyHadCleaning = getAlreadyCleaning;
+    }
+
+    if(alreadyHadCleaning){
+        return;
+    } else {
+        localStorage.removeItem('goalsArray');
+        localStorage.removeItem('containerButtonsGoal');
+        localStorage.removeItem('containerButtonsGoal');
+    }
+
+    JSON.stringify(localStorage.setItem('cleaningStorage', alreadyHadCleaning));
+}
+
+if(firstDaySecondWeek.diff(today, 'day') == 0){
+    let storagedCleaningValue = JSON.parse(localStorage.getItem('cleaningStorage'));
+    storagedCleaningValue = true;
+    JSON.stringify(localStorage.setItem('cleaningStorage', storagedCleaningValue));
+    cleanStorage();
+}
 
 // determinar o texto do header
 const firstDayOfWeek = dayjs().startOf('week');
