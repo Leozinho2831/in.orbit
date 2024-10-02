@@ -1,9 +1,17 @@
+// para conseguir exportar deve estar fora de qualquer função
+const sectionCreateMeta = document.querySelector('.js-sectionGoalMenu');
+const classCreateMeta = 'js-menuOpened';
+
+const sectionBlur = document.querySelector('.js-sectionBlur');
+
+export default function closeCreateGoal() {
+    sectionBlur.style.cssText = 'filter: none;';
+    sectionCreateMeta.classList.remove(classCreateMeta);
+}
+        
+window.closeCreateGoal = closeCreateGoal;
+
 window.addEventListener('load', () => {
-
-    const sectionCreateMeta = document.querySelector('.js-sectionGoalMenu');
-    const classCreateMeta = 'js-menuOpened';
-
-    const sectionBlur = document.querySelector('.js-sectionBlur');
         
     function openRegisterGoal(){
         sectionBlur.style.cssText = 'filter: blur(5px);';
@@ -11,15 +19,8 @@ window.addEventListener('load', () => {
         sectionCreateMeta.classList.add(classCreateMeta);
     }
         
-        // deve-se determinar a função que quer usar no html como global, desta maneira.
+    // deve-se determinar a função que quer usar no html como global, desta maneira.
     window.openRegisterGoal = openRegisterGoal;
-        
-    function closeCreateGoal() {
-        sectionBlur.style.cssText = 'filter: none;';
-        sectionCreateMeta.classList.remove(classCreateMeta);
-    }
-            
-    window.closeCreateGoal = closeCreateGoal;
             
     const radios = document.querySelectorAll('input[type="radio"]');
         
