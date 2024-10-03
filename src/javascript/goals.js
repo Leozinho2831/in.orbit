@@ -15,33 +15,55 @@ const firstDaySecondWeek = dayjs(firstDayMonth).add(2, 'week').startOf('week');
 function cleanStorage(){
     let alreadyHadCleaning = false;
 
-    const getAlreadyCleaning = localStorage.getItem('cleaningStorage');
+    const getAlreadyCleaning = JSON.parse(localStorage.getItem('cleaningStorage'));
 
     if(getAlreadyCleaning){
         alreadyHadCleaning = getAlreadyCleaning;
     }
 
     if(alreadyHadCleaning){
-        return;
-    } else {
         localStorage.removeItem('goalsArray');
         localStorage.removeItem('containerButtonsGoal');
-        localStorage.removeItem('containerButtonsGoal');
-    }
+        localStorage.removeItem('containerInfoCompletedGoal');
 
-    JSON.stringify(localStorage.setItem('cleaningStorage', alreadyHadCleaning));
+        alreadyHadCleaning = true;
+        JSON.stringify(localStorage.setItem('cleaningStorage', alreadyHadCleaning));
+    }
 }
 
 if(firstDaySecondWeek.diff(today, 'day') == 0){
-    let storagedCleaningValue = JSON.parse(localStorage.getItem('cleaningStorage'));
-    storagedCleaningValue = true;
-    JSON.stringify(localStorage.setItem('cleaningStorage', storagedCleaningValue));
     cleanStorage();
+} else if(firstDaySecondWeek.diff(today, 'day') == 1) {
+    localStorage.removeItem('cleaningStorage');
 }
 
 // determinar o texto do header
 const firstDayOfWeek = dayjs().startOf('week');
 const lastDayOfWeek = dayjs().endOf('week');
+
+function cleanStorageBasic(){
+    let cleaningBasic = false;
+
+    const getValueCleningBasic = JSON.parse(localStorage.getItem('cleaningBasic'))
+
+    if(getValueCleningBasic){
+        cleaningBasic = getValueCleningBasic;
+    }
+
+    if(cleanStorageBasic){
+        localStorage.removeItem('goalsArray');
+        localStorage.removeItem('containerButtonsGoal');
+
+        cleaningBasic = true;
+        JSON.stringify(localStorage.setItem('cleaningBasic', cleaningBasic));
+    }
+}
+
+if(firstDayOfWeek.diff(today, 'days') == 0){
+    cleanStorageBasic();
+} else if(firstDayMonth.diff(today, 'days') == 1){
+    localStorage.removeItem('cleaningBasic');
+}
 
 const titleHeader = document.querySelector('.js-titleHeader');
 
