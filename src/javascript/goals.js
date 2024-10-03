@@ -33,10 +33,7 @@ function cleanStorage(){
 }
 
 if(today.diff(firstDayThirdWeek, 'day') == 0){    
-    console.log('passei');
-    
     cleanStorage();
-
 } else if(today.diff(firstDayThirdWeek, 'day') == 6 && getAlreadyCleaning){
     localStorage.removeItem('cleaningStorage');
 }
