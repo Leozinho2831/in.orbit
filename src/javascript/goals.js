@@ -4,24 +4,25 @@ import closeCreateGoal from './events-handlers.js';
 dayjs.locale('pt-br');
 
 // limpar storage todo primeiro dia da semana
-const today = dayjs();
+let today = dayjs();
 const month = dayjs().format('MM');
 const year = dayjs().format('YYYY');
 
 // por problemas da biblioteca, tive que colocar dia entre mes e ano para conseguir a data corretamente
 const firstDayMonth = dayjs(`${month} 01 ${year}`);
-const firstDaySecondWeek = dayjs(firstDayMonth).add(2, 'week').startOf('week');
+const firstDayThirdWeek = dayjs(firstDayMonth).add(3, 'week').startOf('week');
+
+const getAlreadyCleaning = JSON.parse(localStorage.getItem('cleaningStorage'));
+
 
 function cleanStorage(){
     let alreadyHadCleaning = false;
-
-    const getAlreadyCleaning = JSON.parse(localStorage.getItem('cleaningStorage'));
 
     if(getAlreadyCleaning){
         alreadyHadCleaning = getAlreadyCleaning;
     }
 
-    if(alreadyHadCleaning){
+    if(!alreadyHadCleaning){
         localStorage.removeItem('goalsArray');
         localStorage.removeItem('containerButtonsGoal');
         localStorage.removeItem('containerInfoCompletedGoal');
@@ -31,9 +32,12 @@ function cleanStorage(){
     }
 }
 
-if(firstDaySecondWeek.diff(today, 'day') == 0){
+if(today.diff(firstDayThirdWeek, 'day') == 0){    
+    console.log('passei');
+    
     cleanStorage();
-} else if(firstDaySecondWeek.diff(today, 'day') == 1) {
+
+} else if(today.diff(firstDayThirdWeek, 'day') == 6 && getAlreadyCleaning){
     localStorage.removeItem('cleaningStorage');
 }
 
@@ -41,27 +45,36 @@ if(firstDaySecondWeek.diff(today, 'day') == 0){
 const firstDayOfWeek = dayjs().startOf('week');
 const lastDayOfWeek = dayjs().endOf('week');
 
+const getValueCleningBasic = JSON.parse(localStorage.getItem('cleaningBasic'));
+
 function cleanStorageBasic(){
     let cleaningBasic = false;
-
-    const getValueCleningBasic = JSON.parse(localStorage.getItem('cleaningBasic'))
 
     if(getValueCleningBasic){
         cleaningBasic = getValueCleningBasic;
     }
-
-    if(cleanStorageBasic){
+    
+    if(!cleaningBasic){
         localStorage.removeItem('goalsArray');
         localStorage.removeItem('containerButtonsGoal');
 
         cleaningBasic = true;
-        JSON.stringify(localStorage.setItem('cleaningBasic', cleaningBasic));
     }
+
+    JSON.stringify(localStorage.setItem('cleaningBasic', cleaningBasic));
 }
 
-if(firstDayOfWeek.diff(today, 'days') == 0){
+cleanStorageBasic();
+
+if(today.diff(firstDayOfWeek, 'days') == 0){    
     cleanStorageBasic();
-} else if(firstDayMonth.diff(today, 'days') == 1){
+} else if
+    (today.diff(firstDayOfWeek, 'days') > 0
+    && today.diff(firstDayOfWeek, 'days') < 6 
+    && !getValueCleningBasic){
+
+    cleanStorage();
+} else if(today.diff(lastDayOfWeek, 'days') == 0){
     localStorage.removeItem('cleaningBasic');
 }
 
