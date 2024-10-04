@@ -133,7 +133,7 @@ function createButtonToCompleteGoal(){
         if(!verifyButtonExist){
             containerButtonsGoal.innerHTML = 
             `
-                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] bg-zinc-950 border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal-${goal.id} ${goal.id}" onclick="completedGoal(this);">
+                <button class="flex items-center gap-2 px-3 py-2 rounded-[3.625rem] bg-zinc-950 border border-dashed border-zinc-800 text-[0.875rem] leading-[1rem] text-zinc-300 tablet:text-[1rem] tablet:leading-[1.4rem] js-buttonCompleteGoal-${goal.id}" onclick="completedGoal(this);">
                     <img class="w-4 h-4 tablet:w-6 tablet:h-6" src="src/images/plus grey.svg" alt="sinal de mais">
                     <span>${goal.title}</span>
                 </button>
@@ -203,29 +203,48 @@ function addInfoCompletedGoal(event){
         goals = storedGoalsArray;
     }
 
-    const completedDateTitle = dayjs().format('ddd[,] DD [de] MMM');
+    const completedDateTitle = dayjs().format('ddd[,] DD [de] MMM');    
     
     for(const goal of goals){        
-        if(event.classList.contains(`${goal.id}`)){
+        if(event.classList.contains(`js-buttonCompleteGoal-${goal.id}`)){
             const titleInfoCompletedGoal = document.querySelector(`.js-dateCompletedGoal-${goal.completedDate}`);
 
             if(titleInfoCompletedGoal){
-                titleInfoCompletedGoal.parentElement.innerHTML += 
-                `
-                <figure class="flex items-center gap-2">
-                    <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
-                    <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
-                        Você completou 
-                        “<span class="font-normal text-zinc-100 js-titleGoalCompleted-0">${goal.title}</span>”
-                        às 
-                        <span class="font-normal text-zinc-100 js-completedInfoHour-0">${goal.completedHour}</span>
-                    </p>
-                </figure>
-                `;
-    
-                break;
+                const firstCompletedGoalInfo = titleInfoCompletedGoal.parentElement.querySelector('figure');
+
+                if(firstCompletedGoalInfo){
+                    firstCompletedGoalInfo.insertAdjacentHTML('beforebegin', 
+                    `
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<span class="font-normal text-zinc-100">${goal.title}</span>”
+                            às 
+                            <span class="font-normal text-zinc-100">${goal.completedHour}</span>
+                        </p>
+                    </figure>
+                    `);
+
+                    break;
+                } else {
+                    titleInfoCompletedGoal.insertAdjacentHTML('afterend',
+                    `
+                    <figure class="flex items-center gap-2">
+                        <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
+                        <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
+                            Você completou 
+                            “<span class="font-normal text-zinc-100">${goal.title}</span>”
+                            às 
+                            <span class="font-normal text-zinc-100">${goal.completedHour}</span>
+                        </p>
+                    </figure>
+                    `);
+
+                    break;
+                }
             } else {
-                containerInfoCompletedGoal.innerHTML = 
+                containerInfoCompletedGoal.insertAdjacentHTML('afterbegin', 
                 `
                 <div class="flex flex-col justify-center gap-3 js-completeGoal-01-10-2023">
                     <h3 class="mb-1 first-letter:uppercase text-[1.2rem] leading-[1.5rem] text-zinc-50 tablet:text-[1.4rem] tablet:leading-[2rem] js-dateCompletedGoal-${goal.completedDate}">${completedDateTitle}</h3>
@@ -234,13 +253,13 @@ function addInfoCompletedGoal(event){
                         <img class="w-4 h-4 tablet:w-5 tablet:h-5" src="src/images/circle checked.svg" alt="círculo ativo">
                         <p class="text-[0.875rem] leading-[1.25rem] text-zinc-400 tablet:text-[1rem] tablet:leading-[1.4rem]">
                             Você completou 
-                            “<span class="font-normal text-zinc-100 js-titleGoalCompleted-0">${goal.title}</span>”
+                            “<span class="font-normal text-zinc-100">${goal.title}</span>”
                             às 
-                            <span class="font-normal text-zinc-100 js-completedInfoHour-0">${goal.completedHour}</span>
+                            <span class="font-normal text-zinc-100">${goal.completedHour}</span>
                         </p>
                     </figure>
                 </div>
-                ` + containerInfoCompletedGoal.innerHTML;
+                `);
     
                 break;
             }
@@ -260,7 +279,7 @@ function completedGoal(event){
     }
     
     for(const goal of goals){
-        if(event.classList.contains(`${goal.id}`)){
+        if(event.classList.contains(`js-buttonCompleteGoal-${goal.id}`)){
 
             goal.completed++;
             goal.completedDate = dayjs().format('DD-MM-YYYY');
