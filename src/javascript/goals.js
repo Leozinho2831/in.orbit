@@ -34,7 +34,7 @@ function cleanStorage(){
 
 if(today.diff(firstDayThirdWeek, 'day') == 0){    
     cleanStorage();
-} else if(today.diff(firstDayThirdWeek, 'day') == 6 && getAlreadyCleaning){
+} else if(firstDayThirdWeek.diff(today, 'day') == 6 && getAlreadyCleaning){
     localStorage.removeItem('cleaningStorage');
 }
 
@@ -63,12 +63,14 @@ function cleanStorageBasic(){
 
 cleanStorageBasic();
 
-if(today.diff(firstDayOfWeek, 'days') == 0){    
+if(today.diff(firstDayOfWeek, 'days') == 0){
+    localStorage.removeItem('cleaningBasic');
+
     cleanStorageBasic();
 } else if
-    (today.diff(firstDayOfWeek, 'days') > 0
-    && today.diff(firstDayOfWeek, 'days') < 6 
-    && !getValueCleningBasic){
+    (today.diff(firstDayOfWeek, 'days') > 0 && 
+    today.diff(firstDayOfWeek, 'days') < 6 && 
+    !getValueCleningBasic){
 
     cleanStorage();
 } else if(today.diff(lastDayOfWeek, 'days') == 0){
